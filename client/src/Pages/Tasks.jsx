@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import tasksData from "../Task.json"; // Import your JSON file
 
 function Tasks() {
@@ -50,47 +51,48 @@ function Tasks() {
         ) : (
           <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {tasks.map((task, index) => (
-                <div
-                  className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative"
-                  key={index}
-                >
-                  <div className="sm:flex sm:justify-between sm:gap-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-                        {task.title}
-                      </h3>
-                      <p className="mt-1 text-xs font-medium text-gray-600">
+              {tasks.map((task) => (
+                <Link to={`/task/${task.id}`} key={task.id}>
+                  <div
+                    className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative"
+                  >
+                    <div className="sm:flex sm:justify-between sm:gap-4">
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+                          {task.title}
+                        </h3>
+                        <p className="mt-1 text-xs font-medium text-gray-600">
+                          {task.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4">
+                      <p className="text-pretty text-sm text-gray-500">
                         {task.description}
                       </p>
                     </div>
-                  </div>
 
-                  <div className="mt-4">
-                    <p className="text-pretty text-sm text-gray-500">
-                      {task.description}
-                    </p>
+                    <dl className="mt-6 flex gap-4 sm:gap-6 pb-4">
+                      <div className="flex flex-col-reverse flex-1">
+                        <dt className="text-sm font-medium text-gray-600">
+                          Start time
+                        </dt>
+                        <dd className="text-xs text-gray-500">
+                          {new Date(task.start_time).toLocaleString()}
+                        </dd>
+                      </div>
+                      <div className="flex flex-col-reverse flex-1">
+                        <dt className="text-sm font-medium text-gray-600">
+                          End time
+                        </dt>
+                        <dd className="text-xs text-gray-500">
+                          {new Date(task.end_time).toLocaleString()}
+                        </dd>
+                      </div>
+                    </dl>
                   </div>
-
-                  <dl className="mt-6 flex gap-4 sm:gap-6 pb-4">
-                    <div className="flex flex-col-reverse flex-1">
-                      <dt className="text-sm font-medium text-gray-600">
-                        Start time
-                      </dt>
-                      <dd className="text-xs text-gray-500">
-                        {new Date(task.start_time).toLocaleString()}
-                      </dd>
-                    </div>
-                    <div className="flex flex-col-reverse flex-1">
-                      <dt className="text-sm font-medium text-gray-600">
-                        End time
-                      </dt>
-                      <dd className="text-xs text-gray-500">
-                        {new Date(task.end_time).toLocaleString()}
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

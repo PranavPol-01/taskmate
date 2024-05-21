@@ -1,65 +1,74 @@
 {
-    "tasks": [
-      {
-        "title": "Project Meeting",
-        "description": "Discuss project milestones and deliverables with the team.",
-        "start_time": "2024-05-21T10:00:00",
-        "end_time": "2024-05-21T11:00:00"
-      },
-      {
-        "title": "Code Review",
-        "description": "Review the latest code changes and provide feedback.",
-        "start_time": "2024-05-21T12:00:00",
-        "end_time": "2024-05-21T13:00:00"
-      },
-      {
-        "title": "Client Presentation",
-        "description": "Present the project progress to the client.",
-        "start_time": "2024-05-22T09:00:00",
-        "end_time": "2024-05-22T10:30:00"
-      },
-      {
-        "title": "Team Lunch",
-        "description": "Team bonding lunch at a local restaurant.",
-        "start_time": "2024-05-22T12:30:00",
-        "end_time": "2024-05-22T14:00:00"
-      },
-      {
-        "title": "Market Research",
-        "description": "Conduct research on market trends and competitors.",
-        "start_time": "2024-05-23T10:00:00",
-        "end_time": "2024-05-23T12:00:00"
-      },
-      {
-        "title": "Development Sprint Planning",
-        "description": "Plan the tasks and goals for the next development sprint.",
-        "start_time": "2024-05-23T14:00:00",
-        "end_time": "2024-05-23T15:00:00"
-      },
-      {
-        "title": "Design Review",
-        "description": "Review the latest UI/UX designs and suggest improvements.",
-        "start_time": "2024-05-24T11:00:00",
-        "end_time": "2024-05-24T12:00:00"
-      },
-      {
-        "title": "Budget Meeting",
-        "description": "Discuss the project budget and financial planning.",
-        "start_time": "2024-05-24T15:00:00",
-        "end_time": "2024-05-24T16:00:00"
-      },
-      {
-        "title": "QA Testing",
-        "description": "Perform quality assurance testing on the latest build.",
-        "start_time": "2024-05-25T09:00:00",
-        "end_time": "2024-05-25T12:00:00"
-      },
-      {
-        "title": "Weekly Wrap-up",
-        "description": "Summarize the week's progress and plan for the next week.",
-        "start_time": "2024-05-25T16:00:00",
-        "end_time": "2024-05-25T17:00:00"
-      }
-    ]
-  }
-  
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Project Meeting",
+      "description": "Discuss project milestones and deliverables with the team.",
+      "start_time": "2024-05-21T10:00:00",
+      "end_time": "2024-05-21T11:00:00"
+    },
+    {
+      "id": 2,
+      "title": "Code Review",
+      "description": "Review the latest code changes and provide feedback.",
+      "start_time": "2024-05-21T12:00:00",
+      "end_time": "2024-05-21T13:00:00"
+    },
+    {
+      "id": 3,
+      "title": "Client Presentation",
+      "description": "Present the project progress to the client.",
+      "start_time": "2024-05-22T09:00:00",
+      "end_time": "2024-05-22T10:30:00"
+    },
+    {
+      "id": 4,
+      "title": "Team Lunch",
+      "description": "Team bonding lunch at a local restaurant.",
+      "start_time": "2024-05-22T12:30:00",
+      "end_time": "2024-05-22T14:00:00"
+    },
+    {
+      "id": 5,
+      "title": "Market Research",
+      "description": "Conduct research on market trends and competitors.",
+      "start_time": "2024-05-23T10:00:00",
+      "end_time": "2024-05-23T12:00:00"
+    },
+    {
+      "id": 6,
+      "title": "Development Sprint Planning",
+      "description": "Plan the tasks and goals for the next development sprint.",
+      "start_time": "2024-05-23T14:00:00",
+      "end_time": "2024-05-23T15:00:00"
+    },
+    {
+      "id": 7,
+      "title": "Design Review",
+      "description": "Review the latest UI/UX designs and suggest improvements.",
+      "start_time": "2024-05-24T11:00:00",
+      "end_time": "2024-05-24T12:00:00"
+    },
+    {
+      "id": 8,
+      "title": "Budget Meeting",
+      "description": "Discuss the project budget and financial planning.",
+      "start_time": "2024-05-24T15:00:00",
+      "end_time": "2024-05-24T16:00:00"
+    },
+    {
+      "id": 9,
+      "title": "QA Testing",
+      "description": "Perform quality assurance testing on the latest build.",
+      "start_time": "2024-05-25T09:00:00",
+      "end_time": "2024-05-25T12:00:00"
+    },
+    {
+      "id": 10,
+      "title": "Weekly Wrap-up",
+      "description": "Summarize the week's progress and plan for the next week.",
+      "start_time": "2024-05-25T16:00:00",
+      "end_time": "2024-05-25T17:00:00"
+    }
+  ]
+}
