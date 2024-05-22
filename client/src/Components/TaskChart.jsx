@@ -6,7 +6,6 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TaskChart = ({ tasks }) => {
-  // Function to determine the priority of a task based on the start time
   const calculatePriority = (startTime) => {
     const now = new Date();
     const start = new Date(startTime);
@@ -54,9 +53,13 @@ const TaskChart = ({ tasks }) => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
-      <h2 className="text-xl font-bold text-center mb-4">Tasks by Priority</h2>
+    <div className="container mx-auto mt-8 flex justify-center flex-col">
+      <h2 className="text-xl font-bold text-center mb-4 ">Tasks by Priority</h2>
+      <div className="flex justify-center">
+      <div className=" lg:w-[70rem] ">
       <Bar data={data} options={options} />
+      </div>
+      </div>
     </div>
   );
 };

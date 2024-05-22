@@ -123,7 +123,7 @@ function Navbar() {
               {hasEmail ? (
                 isAdmin ? (
                   <div className="sm:flex sm:gap-4 ">
-                    <Link to="/admin" className="flex items-center">
+                    <Link to="/dashboard" className="flex items-center">
                       <a className="rounded-md bg-teal-600 lg:px-5 py-2.5 text-sm font-medium text-white shadow hidden md:block">
                         Dashboard
                       </a>
