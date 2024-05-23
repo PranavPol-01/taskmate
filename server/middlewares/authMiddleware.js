@@ -1,35 +1,24 @@
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
 
-const protectRoute = async (req, res, next) => {
-  try {
-    let token = req.cookies?.token;
+export const protect = async (req, res, next) => {
+  let token;
 
-    if (token) {
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    try {
+      token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, 'your_jwt_secret');
 
-      const resp = await User.findById(decodedToken.userId).select(
-        "isAdmin email"
-      );
-
-      req.user = {
-        email: resp.email,
-        isAdmin: resp.isAdmin,
-        userId: decodedToken.userId,
-      };
-
+      req.user = await User.findById(decoded.id).select('-password');
       next();
-    } else {
-      return res
-        .status(401)
-        .json({ status: false, message: "Not authorized. Try login again." });
+    } catch (error) {
+      res.status(401).json({ message: 'Not authorized, token failed' });
     }
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(401)
-      .json({ status: false, message: "Not authorized. Try login again." });
+  }
+
+  if (!token) {
+    res.status(401).json({ message: 'Not authorized, no token' });
   }
 };
 
-export {protectRoute};
+export default protect;

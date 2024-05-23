@@ -1,9 +1,9 @@
-import User from '../models/User.js';
+import User from '../models/user.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-import { bcrypt } from 'bcryptjs';
-import { jwt } from 'jsonwebtoken';
-
-exports.register = async (req, res) => {
+// Register a new user
+export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -23,7 +23,8 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+// Log in a user
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -45,7 +46,8 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.getUser = async (req, res) => {
+// Get user profile
+export const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
@@ -53,3 +55,5 @@ exports.getUser = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export default { registerUser, loginUser, getUser };

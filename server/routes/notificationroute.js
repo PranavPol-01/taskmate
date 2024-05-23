@@ -8,4 +8,4 @@ router.post('/', authMiddleware, notificationController.createNotification);
 router.get('/', authMiddleware, notificationController.getNotifications);
 router.delete('/:id', authMiddleware, notificationController.deleteNotification);
 
-module.exports = router;
+export default  router;

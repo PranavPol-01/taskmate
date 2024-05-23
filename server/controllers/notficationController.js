@@ -1,7 +1,7 @@
 import Notification from "../models/notification.js"
-const Task = require('../models/task');
+import Task from "../models/task.js";
 
-exports.createNotification = async (req, res) => {
+export const createNotification = async (req, res) => {
   try {
     const { taskId } = req.body;
     const task = await Task.findById(taskId);
@@ -25,7 +25,7 @@ exports.createNotification = async (req, res) => {
   }
 };
 
-exports.getNotifications = async (req, res) => {
+export const getNotifications = async (req, res) => {
   try {
     const notifications = await Notification.find({}).populate('task');
     res.json(notifications);
@@ -34,7 +34,7 @@ exports.getNotifications = async (req, res) => {
   }
 };
 
-exports.deleteNotification = async (req, res) => {
+export const deleteNotification = async (req, res) => {
   try {
     const { id } = req.params;
     await Notification.findByIdAndDelete(id);
@@ -43,3 +43,5 @@ exports.deleteNotification = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export default {createNotification,getNotifications,deleteNotification};
