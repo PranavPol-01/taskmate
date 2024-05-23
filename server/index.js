@@ -4,6 +4,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./utils/index.js";
+import {errorHandler, routeNotFound} from "./middlewares/errorMiddleware.js";
+import userRoutes from "./routes/userRoute.js";
+import taskRoutes from "./routes/taskRoute.js";
+import notificationRoutes from "./routes/notificationroute.js";
 
 dotenv.config();
 
@@ -25,11 +29,14 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(express.urlencoded());
+app.use(express.urlencoded( {extended : true}));
 // app.use("/api",routes);
+app.use('/api/users', userRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/notifications', notificationRoutes);
 
-// app.use(routeNotFound)
-// app.use(errorHandler)
+app.use(routeNotFound)
+app.use(errorHandler)
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`)
 });
