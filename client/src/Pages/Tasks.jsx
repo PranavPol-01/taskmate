@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import tasksData from "../Task.json"; // Import your JSON file
+import axios from 'axios';
 
 function Tasks() {
   const targetRef = useRef();
@@ -8,35 +8,46 @@ function Tasks() {
   const [tasks, setTasks] = useState({ all: [], high: [], mid: [], low: [] });
 
   useEffect(() => {
-    const highPriority = [];
-    const mediumPriority = [];
-    const lowPriority = [];
-    const allTasks = [];
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('http://localhost:8800/api/tasks');
+        const tasksData = response.data.tasks;
 
-    const currentTime = new Date();
+        const highPriority = [];
+        const mediumPriority = [];
+        const lowPriority = [];
+        const allTasks = [];
 
-    tasksData.tasks.forEach((task) => {
-      const endTime = new Date(task.end_time);
-      const timeDiff = endTime.getTime() - currentTime.getTime();
-      const hoursDiff = timeDiff / (1000 * 3600); // Convert milliseconds to hours
+        const currentTime = new Date();
 
-      allTasks.push(task);
+        tasksData.forEach((task) => {
+          const endTime = new Date(task.end_time);
+          const timeDiff = endTime.getTime() - currentTime.getTime();
+          const hoursDiff = timeDiff / (1000 * 3600); 
 
-      if (hoursDiff <= 12) {
-        highPriority.push(task);
-      } else if (hoursDiff <= 24) {
-        mediumPriority.push(task);
-      } else {
-        lowPriority.push(task);
+          allTasks.push(task);
+
+          if (hoursDiff <= 12) {
+            highPriority.push(task);
+          } else if (hoursDiff <= 24) {
+            mediumPriority.push(task);
+          } else {
+            lowPriority.push(task);
+          }
+        });
+
+        setTasks({
+          all: allTasks,
+          high: highPriority,
+          mid: mediumPriority,
+          low: lowPriority,
+        });
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
       }
-    });
+    };
 
-    setTasks({
-      all: allTasks,
-      high: highPriority,
-      mid: mediumPriority,
-      low: lowPriority,
-    });
+    fetchTasks();
   }, []);
 
   const handleTabChange = (tab) => {
@@ -53,26 +64,14 @@ function Tasks() {
             <div className="">
               {tasks.map((task) => (
                 <Link to={`/task/${task.id}`} key={task.id}>
-                  <div
-                    className="block rounded-xl border border-gray-800 p-5 m-4 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative"
-                  >
+                  <div className="block rounded-xl border border-gray-800 p-5 m-4 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
                     <div className="sm:flex sm:justify-between sm:gap-4">
                       <div>
                         <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
                           {task.title}
                         </h3>
-                        {/* <p className="mt-1 text-xs font-medium text-gray-600">
-                          {task.description}
-                        </p> */}
                       </div>
                     </div>
-
-                    {/* <div className="mt-4">
-                      <p className="text-pretty text-sm text-gray-500">
-                        {task.description}
-                      </p>
-                    </div> */}
-
                     <dl className="mt-6 flex gap-4 sm:gap-6 ">
                       <div className="flex flex-col-reverse flex-1">
                         <dt className="text-sm font-medium text-gray-600">
@@ -109,7 +108,6 @@ function Tasks() {
         </h1>
         <fieldset className="flex flex-wrap gap-3 mb-3">
           <legend className="sr-only">Tab Options</legend>
-
           <div>
             <button
               className={`${
@@ -122,7 +120,6 @@ function Tasks() {
               All
             </button>
           </div>
-
           <div>
             <button
               className={`${
@@ -135,7 +132,6 @@ function Tasks() {
               High
             </button>
           </div>
-
           <div>
             <button
               className={`${
@@ -148,7 +144,6 @@ function Tasks() {
               Medium
             </button>
           </div>
-
           <div>
             <button
               className={`${
