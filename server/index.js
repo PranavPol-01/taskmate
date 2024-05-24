@@ -23,32 +23,31 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-const ONE_HOUR = 1000 * 60 * 60;
+// const ONE_HOUR = 1000 * 60 * 60;
 
-const checkTasksForReminders = async () => {
-  try {
-    const tasks = await Task.find().populate('user_id'); 
-    const now = new Date();
+// const checkTasksForReminders = async () => {
+//   try {
+//     const tasks = await Task.find().populate('user_id'); 
+//     const now = new Date();
 
-    tasks.forEach(task => {
-      const endTime = new Date(task.end_time);
-      const reminderTime = new Date(endTime.getTime() - ONE_HOUR);
+//     tasks.forEach(task => {
+//       const endTime = new Date(task.end_time);
+//       const reminderTime = new Date(endTime.getTime() - ONE_HOUR);
 
-      if (now >= reminderTime && now < endTime) {
-        const userEmail = task.user_id.email;
-        sendReminderEmail(userEmail, 'Task Reminder', `Reminder: Your task "${task.title}" is ending in one hour.`);
-      }
-    });
-  } catch (error) {
-    console.error('Error fetching tasks:', error);
-  }
-};
+//       if (now >= reminderTime && now < endTime) {
+//         const userEmail = task.user_id.email;
+//         sendReminderEmail(userEmail, 'Task Reminder', `Reminder: Your task "${task.title}" is ending in one hour.`);
+//       }
+//     });
+//   } catch (error) {
+//     console.error('Error fetching tasks:', error);
+//   }
+// };
 
-// Schedule the task to run every minute
-cron.schedule('* * * * *', () => {
-  console.log('Checking tasks for reminders...');
-  checkTasksForReminders();
-});
+// cron.schedule('* * * * *', () => {
+//   console.log('Checking tasks for reminders...');
+//   checkTasksForReminders();
+// });
 
 app.use(cors({
     origin: ["http://localhost:5173", "http://localhost:3000"], 
