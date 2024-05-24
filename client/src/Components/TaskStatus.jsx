@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import tasksData from "../Task.json"; // Import your JSON file
+import axios from 'axios';
 
 function TaskStatus() {
   const targetRef = useRef();
@@ -8,30 +8,45 @@ function TaskStatus() {
   const [tasks, setTasks] = useState({ missed: [], completed: [], deleted: [] });
 
   useEffect(() => {
-    const missedTasks = [];
-    const completedTasks = [];
-    const deletedTasks = [];
+    const fetchTasks = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:8800/api/tasks', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
 
-    const currentTime = new Date();
+        const tasksData = response.data.tasks;
+        const missedTasks = [];
+        const completedTasks = [];
+        const deletedTasks = [];
 
-    tasksData.tasks.forEach((task) => {
-      const endTime = new Date(task.end_time);
+        const currentTime = new Date();
 
-      // Example: Task is missed if end_time is in the past
-      if (endTime < currentTime) {
-        missedTasks.push(task);
-      } else if (task.status === "completed") {
-        completedTasks.push(task); // Example: Task has a status of completed
-      } else if (task.status === "deleted") {
-        deletedTasks.push(task); // Example: Task has a status of deleted
+        tasksData.forEach((task) => {
+          const endTime = new Date(task.end_time);
+
+          if (endTime < currentTime) {
+            missedTasks.push(task);
+          } else if (task.status === "completed") {
+            completedTasks.push(task); 
+          } else if (task.status === "deleted") {
+            deletedTasks.push(task); 
+          }
+        });
+
+        setTasks({
+          missed: missedTasks,
+          completed: completedTasks,
+          deleted: deletedTasks,
+        });
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
       }
-    });
+    };
 
-    setTasks({
-      missed: missedTasks,
-      completed: completedTasks,
-      deleted: deletedTasks,
-    });
+    fetchTasks();
   }, []);
 
   const handleTabChange = (tab) => {
@@ -47,7 +62,7 @@ function TaskStatus() {
           <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {tasks.map((task) => (
-                <Link to={`/task/${task.id}`} key={task.id}>
+                <Link to={`/task/${task._id}`} key={task._id}>
                   <div className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
                     <div className="sm:flex sm:justify-between sm:gap-4">
                       <div>

@@ -1,4 +1,3 @@
-
 import React, { useMemo } from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
@@ -16,7 +15,6 @@ const TaskChart = ({ tasks }) => {
     return "Low";
   };
 
-  // Categorize tasks based on their priority
   const taskPriorities = useMemo(() => {
     const priorities = { Low: 0, Medium: 0, High: 0 };
     tasks.forEach(task => {
@@ -56,9 +54,9 @@ const TaskChart = ({ tasks }) => {
     <div className="container mx-auto mt-8 flex justify-center flex-col">
       <h2 className="text-xl font-bold text-center mb-4 ">Tasks by Priority</h2>
       <div className="flex justify-center">
-      <div className=" lg:w-[70rem] ">
-      <Bar data={data} options={options} />
-      </div>
+        <div className="lg:w-[70rem]">
+          <Bar data={data} options={options} />
+        </div>
       </div>
     </div>
   );

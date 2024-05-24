@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import tasksData from "../Task.json"; // Import the tasks data from JSON file
+import axios from 'axios';
 
 function StatsView() {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
@@ -18,6 +18,14 @@ function StatsView() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:8800/api/tasks', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const tasks = response.data.tasks;
         const today = new Date();
         const todayDateString = today.toISOString().split("T")[0];
 
@@ -25,7 +33,7 @@ function StatsView() {
         let completedTasks = 0;
         let upcomingTasks = 0;
 
-        tasksData.tasks.forEach((task) => {
+        tasks.forEach((task) => {
           const taskDate = task.start_time.split("T")[0];
 
           if (taskDate < todayDateString) {
@@ -41,13 +49,12 @@ function StatsView() {
         setCompletedTasksCount(completedTasks);
         setUpcomingTasksCount(upcomingTasks);
 
-        // Slowly increment counts to the fetched values
-        const incrementValueCompleted = Math.ceil(completedTasks / 100); 
+        const incrementValueCompleted = Math.ceil(completedTasks / 100);
         const incrementValueToday = Math.ceil(todayTasks / 100);
         const incrementValueUpcoming = Math.ceil(upcomingTasks / 100);
         
         for (let i = 0; i <= completedTasks; i += incrementValueCompleted) {
-          await new Promise((resolve) => setTimeout(resolve, 60)); 
+          await new Promise((resolve) => setTimeout(resolve, 60));
           completedCount.set(i);
         }
         for (let i = 0; i <= todayTasks; i += incrementValueToday) {

@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard";
 import Tasks from "./Pages/Tasks";
 import TaskForm from "./Pages/TaskForm";
 import TaskDetail from "./Pages/TaskDetail";
+import TaskEdit from './Pages/TaskEdit';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/taskform" element={<TaskForm />} />
           <Route path="/task/:id" element={<TaskDetail />} />
+          <Route path="/task/:id/edit" element={<TaskEdit />} />
           
         </Routes>
         

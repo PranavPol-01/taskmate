@@ -41,11 +41,17 @@ function Tasks() {
           }
         });
 
+        // Filter tasks for each priority level to only include those with status "in progress"
+        const inProgressHighPriority = highPriority.filter(task => task.status === "in progress");
+        const inProgressMediumPriority = mediumPriority.filter(task => task.status === "in progress");
+        const inProgressLowPriority = lowPriority.filter(task => task.status === "in progress");
+        const inProgressAllTasks = allTasks.filter(task => task.status === "in progress");
+
         setTasks({
-          all: allTasks,
-          high: highPriority,
-          mid: mediumPriority,
-          low: lowPriority,
+          all: inProgressAllTasks,
+          high: inProgressHighPriority,
+          mid: inProgressMediumPriority,
+          low: inProgressLowPriority,
         });
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -59,7 +65,20 @@ function Tasks() {
     setActiveTab(tab);
   };
 
+  const handleCheckboxChange = (taskId) => {
+    // Update the task status to "completed" or "in progress" based on the checkbox state
+    const updatedTasks = tasks.map(task => {
+      if (task._id === taskId) {
+        return { ...task, status: task.status === "completed" ? "in progress" : "completed" };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  };
+
   const renderTasks = (tasks) => {
+    
+  
     return (
       <div className="bg-white text-grey-900 container px-5 py-10 mx-auto">
         {tasks.length === 0 ? (
@@ -68,35 +87,51 @@ function Tasks() {
           <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
             <div className="">
               {tasks.map((task) => (
-                <Link to={`/task/${task._id}`} key={task._id}>
-                  <div className="block rounded-xl border border-gray-800 p-5 m-4 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
-                    <div className="sm:flex sm:justify-between sm:gap-4">
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-                          {task.title}
-                        </h3>
+                <div key={task._id}>
+                  <Link to={`/task/${task._id}`}>
+                    <div className="block rounded-xl border border-gray-800 p-5 m-4 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
+                      <div className="sm:flex sm:justify-between sm:gap-4">
+                        {/* Checkbox to mark task as completed */}
+                  <label className="inline-flex items-center">
+                    
+                    <input
+                      type="checkbox"
+                      className="form-checkbox text-sky-500"
+                      checked={task.status === "completed"}
+                      onChange={() => handleCheckboxChange(task._id)}
+                    />
+                    
+                 
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+                            {task.title}
+                          </h3>
+                        </div>
+                        </label>
                       </div>
+                      <dl className="mt-6 flex gap-4 sm:gap-6 ">
+                        <div className="flex flex-col-reverse flex-1">
+                          <dt className="text-sm font-medium text-gray-600">
+                            Start time
+                          </dt>
+                          <dd className="text-xs text-gray-500">
+                            {new Date(task.start_time).toLocaleString()}
+                          </dd>
+                        </div>
+                        <div className="flex flex-col-reverse flex-1">
+                          <dt className="text-sm font-medium text-gray-600">
+                            End time
+                          </dt>
+                          <dd className="text-xs text-gray-500">
+                            {new Date(task.end_time).toLocaleString()}
+                          </dd>
+                        </div>
+                      </dl>
+                      
                     </div>
-                    <dl className="mt-6 flex gap-4 sm:gap-6 ">
-                      <div className="flex flex-col-reverse flex-1">
-                        <dt className="text-sm font-medium text-gray-600">
-                          Start time
-                        </dt>
-                        <dd className="text-xs text-gray-500">
-                          {new Date(task.start_time).toLocaleString()}
-                        </dd>
-                      </div>
-                      <div className="flex flex-col-reverse flex-1">
-                        <dt className="text-sm font-medium text-gray-600">
-                          End time
-                        </dt>
-                        <dd className="text-xs text-gray-500">
-                          {new Date(task.end_time).toLocaleString()}
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
-                </Link>
+                  </Link>
+                  
+                </div>
               ))}
             </div>
           </div>
@@ -104,6 +139,7 @@ function Tasks() {
       </div>
     );
   };
+  
 
   return (
     <div className="flex flex-col items-center" ref={targetRef}>

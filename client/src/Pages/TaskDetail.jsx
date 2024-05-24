@@ -10,7 +10,7 @@ const TaskDetail = () => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         const response = await axios.get(`http://localhost:8800/api/tasks/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
@@ -30,11 +30,21 @@ const TaskDetail = () => {
   }
 
   const handleEdit = () => {
-    alert("Edit functionality is not implemented yet.");
+    navigate(`/task/${id}/edit`);
   };
 
-  const handleDelete = () => {
-    alert("Delete functionality is not implemented yet.");
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.put(`http://localhost:8800/api/tasks/${id}`, { status: "deleted" }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      navigate(-1);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
   return (
