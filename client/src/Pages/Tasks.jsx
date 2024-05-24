@@ -10,7 +10,12 @@ function Tasks() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:8800/api/tasks');
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:8800/api/tasks', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const tasksData = response.data.tasks;
 
         const highPriority = [];
@@ -63,7 +68,7 @@ function Tasks() {
           <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
             <div className="">
               {tasks.map((task) => (
-                <Link to={`/task/${task.id}`} key={task.id}>
+                <Link to={`/task/${task._id}`} key={task._id}>
                   <div className="block rounded-xl border border-gray-800 p-5 m-4 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
                     <div className="sm:flex sm:justify-between sm:gap-4">
                       <div>

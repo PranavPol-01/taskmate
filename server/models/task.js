@@ -22,11 +22,6 @@ const taskSchema = new mongoose.Schema({
     enum: ['missed', 'completed', 'deleted', 'in progress'],
     required: true
   },
-  // priority: {
-  //   type: String,
-  //   enum: ['high', 'medium', 'low'],
-  //   required: true
-  // },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

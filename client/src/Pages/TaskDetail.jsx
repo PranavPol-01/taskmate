@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import tasksData from "../Task.json"; // Import your JSON file
+import axios from 'axios';
 
 const TaskDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const task = tasksData.tasks.find((task) => task.id === parseInt(id));
+  const [task, setTask] = useState(null);
+
+  useEffect(() => {
+    const fetchTask = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`http://localhost:8800/api/tasks/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setTask(response.data);
+      } catch (error) {
+        console.error('Error fetching task:', error);
+      }
+    };
+
+    fetchTask();
+  }, [id]);
 
   if (!task) {
-    return <div>Task not found.</div>;
+    return <div>Loading...</div>;
   }
 
   const handleEdit = () => {
