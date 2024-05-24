@@ -45,36 +45,36 @@ const ONE_HOUR = 1000 * 60 * 60;
 //   }
 // };
 
-const checkTasksForRemindersnotification = async () => {
-    try {
-      const tasks = await Task.find().populate('user_id');
-      const now = new Date();
+// const checkTasksForRemindersnotification = async () => {
+//     try {
+//       const tasks = await Task.find().populate('user_id');
+//       const now = new Date();
   
-      tasks.forEach(async (task) => {
-        const endTime = new Date(task.end_time);
-        const reminderTime = new Date(endTime.getTime() - ONE_HOUR);
+//       tasks.forEach(async (task) => {
+//         const endTime = new Date(task.end_time);
+//         const reminderTime = new Date(endTime.getTime() - ONE_HOUR);
   
-        if (now >= reminderTime && now < endTime) {
-          const newNotification = new Notification({
-            user: task.user_id._id,
-            task: task._id,
-            message: `Reminder: Your task "${task.title}" is ending in one hour.`,
-            status: 'unread'
-          });
-          await newNotification.save();
-        }
-      });
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  };
+//         if (now >= reminderTime && now < endTime) {
+//           const newNotification = new Notification({
+//             user: task.user_id._id,
+//             task: task._id,
+//             message: `Reminder: Your task "${task.title}" is ending in one hour.`,
+//             status: 'unread'
+//           });
+//           await newNotification.save();
+//         }
+//       });
+//     } catch (error) {
+//       console.error('Error fetching tasks:', error);
+//     }
+//   };
   
 
-cron.schedule('* * * * *', () => {
-  console.log('Checking tasks for reminders...');
-//   checkTasksForReminders();
-checkTasksForRemindersnotification();
-});
+// cron.schedule('* * * * *', () => {
+//   console.log('Checking tasks for reminders...');
+// //   checkTasksForReminders();
+// checkTasksForRemindersnotification();
+// });
 
 app.use(cors({
     origin: ["http://localhost:5173", "http://localhost:3000"], 
