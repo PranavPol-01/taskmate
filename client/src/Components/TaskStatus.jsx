@@ -1,20 +1,25 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
+import NotFound from "./NotFound";
 
 function TaskStatus() {
   const targetRef = useRef();
   const [activeTab, setActiveTab] = useState("missed");
-  const [tasks, setTasks] = useState({ missed: [], completed: [], deleted: [] });
+  const [tasks, setTasks] = useState({
+    missed: [],
+    completed: [],
+    deleted: [],
+  });
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8800/api/tasks', {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8800/api/tasks", {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         const tasksData = response.data.tasks;
@@ -30,9 +35,9 @@ function TaskStatus() {
           if (endTime < currentTime) {
             missedTasks.push(task);
           } else if (task.status === "completed") {
-            completedTasks.push(task); 
+            completedTasks.push(task);
           } else if (task.status === "deleted") {
-            deletedTasks.push(task); 
+            deletedTasks.push(task);
           }
         });
 
@@ -42,7 +47,7 @@ function TaskStatus() {
           deleted: deletedTasks,
         });
       } catch (error) {
-        console.error('Error fetching tasks:', error);
+        console.error("Error fetching tasks:", error);
       }
     };
 
@@ -57,7 +62,7 @@ function TaskStatus() {
     return (
       <div className="bg-white text-grey-900 container px-5 py-10 mx-auto">
         {tasks.length === 0 ? (
-          <p>No tasks found.</p>
+          <NotFound/>
         ) : (
           <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -69,15 +74,15 @@ function TaskStatus() {
                         <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
                           {task.title}
                         </h3>
-                        <p className="mt-1 text-xs font-medium text-gray-600">
+                        {/* <p className="mt-1 text-xs font-medium text-gray-600">
                           {task.description}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
 
                     <div className="mt-4">
                       <p className="text-pretty text-sm text-gray-500">
-                        {task.description}
+                        {task.description.split(" ").slice(0, 10).join(" ")}...
                       </p>
                     </div>
 

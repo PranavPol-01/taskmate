@@ -6,16 +6,16 @@ const authMiddleware = async (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1];
   // const {token} = req.cookies;
   // console.log(authHeader);
-  console.log("token",token);
+  // console.log("token",token);
   if (!token) {
     return res.status(401).send('Access Denied');
   }
-  console.log("reached here");
+  // console.log("reached here");
 
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("first")
-    console.log("verified",verified);
+    // console.log("first")
+    // console.log("verified",verified);
     req.user = await User.findById(verified.id);
     next();
   } catch (error) {

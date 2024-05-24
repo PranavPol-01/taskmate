@@ -81,8 +81,8 @@ function Login() {
                     User Name
                   </label>
                   <input
-                    id="userName" // Fixed the ID here
-                    type="text" // Changed input type to text
+                    id="userName" 
+                    type="text" 
                     value={userName}
                     onChange={handleuserNameChange}
                     className="w-full rounded border bg-slate-200 px-3 py-2 text-gray-800 outline-none ring-grey-300 transition duration-100 focus:ring"
@@ -134,7 +134,6 @@ function Login() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    {/* Google icon paths go here */}
                   </svg>
                   Continue with Google
                 </button>
@@ -143,7 +142,7 @@ function Login() {
               <div className="flex items-center justify-center bg-blue-100 p-4">
                 <p className="text-center text-sm text-gray-500">
                   Don't have an account?{" "}
-                  <Link to="/signup">
+                  <Link to="/register">
                     <a className="text-blue-500 transition duration-100 hover:text-blue-600 active:text-blue-700">
                       Register
                     </a>

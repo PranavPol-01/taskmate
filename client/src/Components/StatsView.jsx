@@ -28,19 +28,23 @@ function StatsView() {
         const tasks = response.data.tasks;
         const today = new Date();
         const todayDateString = today.toISOString().split("T")[0];
+        console.log("today",todayDateString)
 
         let todayTasks = 0;
         let completedTasks = 0;
         let upcomingTasks = 0;
 
         tasks.forEach((task) => {
-          const taskDate = task.start_time.split("T")[0];
+          const taskStartDate = task.start_time.split("T")[0];
+          const taskEndDate = task.end_time.split("T")[0];
+          
+          console.log(taskEndDate,taskEndDate === todayDateString)
 
-          if (taskDate < todayDateString) {
+          if (task.status === "completed") {
             completedTasks += 1;
-          } else if (taskDate === todayDateString) {
+          } else if (taskEndDate === todayDateString) {
             todayTasks += 1;
-          } else {
+          } else if (taskEndDate > todayDateString) {
             upcomingTasks += 1;
           }
         });
@@ -52,7 +56,7 @@ function StatsView() {
         const incrementValueCompleted = Math.ceil(completedTasks / 100);
         const incrementValueToday = Math.ceil(todayTasks / 100);
         const incrementValueUpcoming = Math.ceil(upcomingTasks / 100);
-        
+
         for (let i = 0; i <= completedTasks; i += incrementValueCompleted) {
           await new Promise((resolve) => setTimeout(resolve, 60));
           completedCount.set(i);

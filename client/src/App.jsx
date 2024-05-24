@@ -13,8 +13,10 @@ import TaskForm from "./Pages/TaskForm";
 import TaskDetail from "./Pages/TaskDetail";
 import TaskEdit from './Pages/TaskEdit';
 import NotificationPage from './Pages/NotificationPage';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
+  const username = useState(localStorage.getItem('username'));
   return (
     <>
       <BrowserRouter>
@@ -25,12 +27,42 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/taskform" element={<TaskForm />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tasks"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Tasks />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/taskform"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <TaskForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <NotificationPage />
+              </ProtectedRoute>
+            }
+          />
+          
+        
           <Route path="/task/:id" element={<TaskDetail />} />
           <Route path="/task/:id/edit" element={<TaskEdit />} />
-          <Route path="/notifications" element={<NotificationPage />} />
           
         </Routes>
         

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import NotFound from "../Components/NotFound";
 
 const NotificationPage = () => {
   const [notifications, setNotifications] = useState([]);
@@ -43,7 +44,7 @@ const NotificationPage = () => {
           Notifications
         </h1>
         {notifications.length === 0 ? (
-          <p className="text-center">No notifications available</p>
+          <NotFound/>
         ) : (
           <ul className="border border-gray-300 rounded-lg p-4">
             {notifications.map(notification => (

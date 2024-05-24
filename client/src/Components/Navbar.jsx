@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Notification from './../../../server/models/notification';
+import Dashboard from './../Pages/Dashboard';
 
 function Navbar() {
   const [hasEmail, sethasEmail] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -15,8 +16,6 @@ function Navbar() {
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("username");
-    const isUser = localStorage.getItem("isAdmin");
-    setIsAdmin(isUser === "true");
     sethasEmail(!!storedEmail);
   }, []);
 
@@ -41,7 +40,7 @@ function Navbar() {
         <div className="flex h-16 items-center justify-between md:border-b-2 md:border-gray-200">
           <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
             <Link
-              to="/"
+              to="/tasks"
               className="ml-3 text-xl  hover:text-green-500"
               style={{ textDecoration: "none" }}
             >
@@ -92,11 +91,23 @@ function Navbar() {
                   <a>
                     {" "}
                     <Link
-                      to="/about"
+                      to="/tasks"
                       className="text-gray-500 hover:text-green-500"
                       style={{ textDecoration: "none" }}
                     >
-                      About
+                      My Tasks
+                    </Link>{" "}
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    {" "}
+                    <Link
+                      to="/taskform"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Add Task
                     </Link>{" "}
                   </a>
                 </li>
@@ -105,11 +116,22 @@ function Navbar() {
                   <a>
                     {" "}
                     <Link
-                      to="/ecommerce"
-                      className="text-gray-500 hover:text-green-500"
+                      to="/notifications"
+                      className="text-gray-500 hover:text-green-500 h-5 w-5"
                       style={{ textDecoration: "none" }}
                     >
-                      Products
+                      <svg
+              aria-hidden="true"
+              class="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+              ></path>
+            </svg>
+                      
                     </Link>{" "}
                   </a>
                 </li>
@@ -121,24 +143,11 @@ function Navbar() {
 
             <div className="flex items-center gap-4">
               {hasEmail ? (
-                isAdmin ? (
-                  <div className="sm:flex sm:gap-4 ">
-                    <Link to="/dashboard" className="flex items-center">
-                      <a className="rounded-md bg-teal-600 lg:px-5 py-2.5 text-sm font-medium text-white shadow hidden md:block">
-                        Dashboard
-                      </a>
-                    </Link>
-                    <Link to="/profile" className="flex items-center">
-                      <a className="rounded-md bg-teal-600 lg:px-5 px-3 py-2.5 text-sm font-medium text-white shadow">
-                        Profile
-                      </a>
-                    </Link>
-                  </div>
-                ) : (
+                 (
                   <div className="sm:flex sm:gap-4">
-                    <Link to="/profile" className="flex items-center">
+                    <Link to="/dashboard" className="flex items-center">
                       <a className="rounded-md bg-teal-600 lg:px-5 px-3 py-2.5 text-sm font-medium text-white shadow">
-                        Profile
+                        Dashboard
                       </a>
                     </Link>
                   </div>
@@ -203,6 +212,15 @@ function Navbar() {
               </button>
 
               <ul className="flex flex-col gap-4">
+              <li>
+                  <Link
+                    to="/notifications"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Notification
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/tasks"
@@ -221,6 +239,7 @@ function Navbar() {
                     Add Tasks
                   </Link>
                 </li>
+                
 
                 
               </ul>
