@@ -1,4 +1,4 @@
-import Notification from "../models/notification.js"
+import Notification from "../models/notification.js";
 import Task from "../models/task.js";
 
 export const createNotification = async (req, res) => {
@@ -11,7 +11,7 @@ export const createNotification = async (req, res) => {
     }
 
     const reminderTime = new Date(task.end_time);
-    reminderTime.setHours(reminderTime.getHours() - 1); // Set reminder 1 hour before task end time
+    reminderTime.setHours(reminderTime.getHours() - 1); 
 
     const newNotification = new Notification({
       task: taskId,
@@ -27,7 +27,7 @@ export const createNotification = async (req, res) => {
 
 export const getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find({}).populate('task');
+    const notifications = await Notification.find({ user: req.user._id }).populate('task');
     res.json(notifications);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -44,4 +44,4 @@ export const deleteNotification = async (req, res) => {
   }
 };
 
-export default {createNotification,getNotifications,deleteNotification};
+export default { createNotification, getNotifications, deleteNotification };

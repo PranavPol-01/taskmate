@@ -12,6 +12,7 @@ import Tasks from "./Pages/Tasks";
 import TaskForm from "./Pages/TaskForm";
 import TaskDetail from "./Pages/TaskDetail";
 import TaskEdit from './Pages/TaskEdit';
+import NotificationPage from './Pages/NotificationPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/taskform" element={<TaskForm />} />
           <Route path="/task/:id" element={<TaskDetail />} />
           <Route path="/task/:id/edit" element={<TaskEdit />} />
+          <Route path="/notifications" element={<NotificationPage />} />
           
         </Routes>
         
