@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../utils/axios'; // Import the Axios instance
+import Navbar from './../Components/Navbar';
 
 function SignUp() {
   const [userName, setUserName] = useState('');
@@ -57,7 +58,8 @@ function SignUp() {
   };
 
   return (
-    <>
+    <>    <Navbar/>
+
       <div style={{ backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, backgroundSize: 'cover' }}>
         <div className="py-4 sm:py-6 lg:py-8 w-screen h-screen flex justify-center items-center sm:px-4">
           <div className="bg-white/40 max-w-md py-4 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">

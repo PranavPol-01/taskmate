@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import NotFound from "./../Components/NotFound";
 import Loader from './../Components/Loader';
+import Navbar from "../Components/Navbar";
+import { motion } from "framer-motion";
+
 
 function Tasks() {
   const targetRef = useRef();
@@ -129,9 +132,27 @@ function Tasks() {
       ) : (
         <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {tasksArray.map((task) => (
-              <div key={task._id}>
-                <div className="block rounded-xl border border-gray-800 py-5 m-2 h-50 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
+            {tasksArray.map((task,index) => (
+              <motion.div key={task._id}
+              initial={{
+                opacity: 0,
+                y: 50,
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 1,
+                  delay: index * 0.1,
+                },
+                animate: {
+                  opacity: 1,
+                  y: 0,
+                },
+              }}
+              viewport={{ once: true }}>
+                <div className="block rounded-xl border border-gray-800 py-5 m-2 h-50 shadow-xl transition  hover:shadow-sky-500/10 relative">
                   <div className="inline-flex">
                     <div className="py-10 p-4 lg:px-5">
                       <label className="flex items-center  ">
@@ -172,7 +193,7 @@ function Tasks() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -180,7 +201,7 @@ function Tasks() {
     </div>
   );
 
-  return (
+  return (<><Navbar/>
     <div className="flex flex-col items-center" ref={targetRef}>
       <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b border-gray-300">
         <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl text-center p-4 pt-7">
@@ -243,7 +264,9 @@ function Tasks() {
       {activeTab === "high" && renderTasks(tasks.high)}
       {activeTab === "mid" && renderTasks(tasks.mid)}
       {activeTab === "low" && renderTasks(tasks.low)}
+      
     </div>
+    </>
   );
 }
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import NotFound from "./NotFound";
+import { motion } from "framer-motion";
+
 
 function TaskStatus() {
   const targetRef = useRef();
@@ -66,9 +68,27 @@ function TaskStatus() {
         ) : (
           <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {tasks.map((task) => (
+              {tasks.map((task,index) => (
                 <Link to={`/task/${task._id}`} key={task._id}>
-                  <div className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-sky-500/10 hover:shadow-sky-500/10 relative">
+                  <motion.div className="block rounded-xl border border-gray-800 p-8 shadow-xl transition  hover:shadow-sky-500/10 relative"
+                  initial={{
+                    opacity: 0,
+
+                    y: 50,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 1,
+                      delay: index * 0.2,
+                    },
+                    animate: {
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                  viewport={{ once: false }}>
                     <div className="sm:flex sm:justify-between sm:gap-4">
                       <div>
                         <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
@@ -104,7 +124,7 @@ function TaskStatus() {
                         </dd>
                       </div>
                     </dl>
-                  </div>
+                  </motion.div>
                 </Link>
               ))}
             </div>

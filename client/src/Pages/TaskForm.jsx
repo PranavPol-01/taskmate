@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Components/Navbar";
 
 function TaskForm() {
   const [taskData, setTaskData] = useState({
@@ -78,7 +79,7 @@ function TaskForm() {
     }
   };
 
-  return (
+  return (<><Navbar/>
     <div className="bg-blue-100  py-6 sm:py-8 lg:py-12 mx-2 md:mx-4">
       <div className="mx-auto max-w-screen-md">
         <div className="mb-6 bg-white p-4 rounded-lg shadow-md">
@@ -179,6 +180,7 @@ function TaskForm() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

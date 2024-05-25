@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Navbar from "../Components/Navbar";
 
 const TaskEdit = () => {
   const { id } = useParams();
@@ -58,7 +59,7 @@ const TaskEdit = () => {
     }
   };
 
-  return (
+  return (<><Navbar/>
     <div className="w-full ">
     <div className="flex  justify-center ">
       <div className="w-full max-w-screen-md px-4 sm:px-6 lg:px-8">
@@ -140,6 +141,7 @@ const TaskEdit = () => {
       </div>
     </div>
     </div>
+    </>
   );
 };
 

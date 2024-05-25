@@ -20,9 +20,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div>
-          <Navbar />
-        </div>
+        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />

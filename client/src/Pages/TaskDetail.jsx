@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Navbar from './../Components/Navbar';
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -47,7 +48,8 @@ const TaskDetail = () => {
     }
   };
 
-  return (
+  return (<>    <Navbar/>
+  
     <div className="flex justify-center">
       <div className="w-full max-w-screen-md px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl text-center py-4">
@@ -80,6 +82,7 @@ const TaskDetail = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

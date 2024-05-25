@@ -3,6 +3,7 @@ import StatsView from '../Components/StatsView';
 import TaskChart from './../Components/TaskChart';
 import TaskStatus from '../Components/TaskStatus';
 import axios from 'axios';
+import Navbar from './../Components/Navbar';
 
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
@@ -28,7 +29,11 @@ function Dashboard() {
   }, []);
 
   return (
+    
     <div>
+      <div>
+          <Navbar />
+        </div>
       <h1 className="text-3xl font-bold text-gray-900 sm:text-3xl py-2 text-center">Task Management Dashboard</h1>
 
       <StatsView />
