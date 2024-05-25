@@ -79,7 +79,7 @@ function TaskForm() {
   };
 
   return (
-    <div className="bg-white py-6 sm:py-8 lg:py-12 mx-2 md:mx-4">
+    <div className="bg-blue-100  py-6 sm:py-8 lg:py-12 mx-2 md:mx-4">
       <div className="mx-auto max-w-screen-md">
         <div className="mb-6 bg-white p-4 rounded-lg shadow-md">
           <h2 className="mb-4 text-center text-3xl font-bold text-gray-800 md:mb-6 lg:text-4xl">

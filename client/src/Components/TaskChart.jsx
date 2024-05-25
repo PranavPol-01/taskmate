@@ -5,20 +5,20 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TaskChart = ({ tasks }) => {
-  const calculatePriority = (startTime) => {
+  const calculatePriority = (endTime) => {
     const now = new Date();
-    const start = new Date(startTime);
-    const hoursDifference = (start - now) / (1000 * 60 * 60);
+    const end = new Date(endTime);
+    const hoursDifference = (end - now) / (1000 * 60 * 60);
 
-    if (hoursDifference <= 24) return "High";
-    if (hoursDifference <= 48) return "Medium";
+    if (hoursDifference <= 12) return "High";
+    if (hoursDifference <= 24) return "Medium";
     return "Low";
   };
 
   const taskPriorities = useMemo(() => {
     const priorities = { Low: 0, Medium: 0, High: 0 };
-    tasks.forEach(task => {
-      const priority = calculatePriority(task.start_time);
+    tasks.filter(task => task.status === "in progress").forEach(task => {
+      const priority = calculatePriority(task.end_time);
       priorities[priority]++;
     });
     return priorities;
@@ -45,14 +45,16 @@ const TaskChart = ({ tasks }) => {
       },
       title: {
         display: true,
-        text: 'Task Count by Priority',
+        text: 'Task Count by Priority (In Progress)',
       },
     },
   };
 
   return (
-    <div className="container mx-auto mt-8 flex justify-center flex-col">
-      <h2 className="text-xl font-bold text-center mb-4 ">Tasks by Priority</h2>
+    <div className="container mx-auto mt-10 mb-10 flex justify-center flex-col ">
+      <h1 className="text-3xl font-bold text-sky-500 sm:text-3xl py-2 flex justify-center">
+            Task By Priority
+          </h1>
       <div className="flex justify-center">
         <div className="lg:w-[70rem]">
           <Bar data={data} options={options} />

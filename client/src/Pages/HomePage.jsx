@@ -1,31 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // import heroImage from './assets/hero-image.png'; // Replace with your actual image path
 import tasksvg from "../assets/task-animate.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarCheck,
+  faFlag,
+  faBell,
+} from "@fortawesome/free-regular-svg-icons";
 
 function LandingPage() {
+  const [hasEmail, sethasEmail] = useState(false);
+
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("username");
+    sethasEmail(storedEmail);
+  }, []);
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <main className="flex-1  ">
-        <section className="bg-white py-20 px-20">
+        <section className="bg-blue-100 py-20 lg:px-20">
           <div className="container mx-auto flex flex-col md:flex-row items-center ">
-            <div className="md:w-1/2 md:pr-10">
+            <div className="md:w-1/2 md:p-10 p-6">
               <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                Manage Your Tasks Efficiently with <span className="text-sky-500">TaskMate</span>
+                Manage Your Tasks Efficiently with{" "}
+                <span className="text-sky-500">TaskMate</span>
               </h2>
               <p className="text-gray-600 mb-6">
                 TaskMate helps you stay organized, set priorities, and keep
                 track of your personal tasks. Whether it's a simple to-do list
                 or a detailed project, TaskMate has got you covered.
               </p>
-              <Link
+              {hasEmail ? (
+                  <Link
+                  to="/tasks"
+                  className="bg-sky-500 text-white px-6 py-3 rounded-md shadow hover:bg-sky-600 transition"
+                >
+                  Get Started
+                </Link>
+              ) : (
+                <Link
                 to="/signup"
                 className="bg-sky-500 text-white px-6 py-3 rounded-md shadow hover:bg-sky-600 transition"
               >
                 Get Started
               </Link>
+                
+              )}
+              
             </div>
-            <div className="md:w-1/2 mt-10 md:mt-0">
+            <div className="md:w-1/2 mt-10  md:mt-0">
               {/* <img src={heroImage} alt="Task Management" className="w-full rounded-lg shadow-lg" /> */}
               {/* <img src="https://images.unsplash.com/photo-1612830121557-6f3d3c3f5f8f" alt="Task Management" className="w-full rounded-lg shadow-lg" /> */}
               <img src={tasksvg} alt="Task Management" className="w-full " />
@@ -42,24 +67,25 @@ function LandingPage() {
               <FeatureCard
                 title="Task Scheduling"
                 description="Easily schedule tasks and set deadlines to stay on track."
-                icon="calendar"
+                icon={<FontAwesomeIcon className="w-6 h-6" icon={faCalendarCheck} />}
+                newProp="New Value"
               />
               <FeatureCard
                 title="Priority Setting"
                 description="Set priorities to focus on what's important."
-                icon="flag"
+                icon={<FontAwesomeIcon className="w-6 h-6" icon={faFlag} />}
               />
               <FeatureCard
                 title="Reminders"
                 description="Get timely reminders for your tasks."
-                icon="bell"
+                icon={<FontAwesomeIcon className="w-6 h-6" icon={faBell} />}
               />
               
             </div>
           </div>
         </section>
 
-        <section className="bg-white py-20">
+        <section className="bg-blue-100 py-20">
           <div className="container mx-auto text-center px-6">
             <h2 className="text-3xl font-bold text-gray-800 mb-12">
               What Our Users Say
@@ -92,7 +118,7 @@ function FeatureCard({ title, description, icon }) {
     <div className=" ">
       <div className="bg-white rounded-lg shadow-lg p-6 text-center h-[13rem]">
         <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-sky-500 text-white rounded-full">
-          <i className={`fas fa-${icon} text-2xl`}></i>
+          {icon}
         </div>
         <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
         <p className="text-gray-600">{description}</p>

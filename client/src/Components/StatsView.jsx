@@ -78,10 +78,10 @@ function StatsView() {
   }, []);
 
   return (
-    <section className="text-gray-600 body-font" style={{ background: "#E2F5D2" }}>
+    <section className="text-gray-600 body-font  " >
       <div className="container px-5 py-5 mx-auto">
-        <div className="flex flex-col text-center w-full mb-20">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-3xl py-2">
+        <div className="flex flex-col text-center w-full mb-10">
+          <h1 className="text-3xl font-bold  sm:text-3xl py-2 text-sky-500">
             Statistical Overview
           </h1>
         </div>

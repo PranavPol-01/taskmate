@@ -59,7 +59,8 @@ const TaskEdit = () => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="w-full ">
+    <div className="flex  justify-center ">
       <div className="w-full max-w-screen-md px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl text-center py-4">
           Edit Task
@@ -137,6 +138,7 @@ const TaskEdit = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

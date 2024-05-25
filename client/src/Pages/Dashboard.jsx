@@ -11,9 +11,11 @@ function Dashboard() {
     const fetchTasks = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8800/api/tasks', {
+        const username = localStorage.getItem('username'); // Assuming username is stored in localStorage
+        const response = await axios.get(`http://localhost:8800/api/tasks`, {
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            Username: username,
           }
         });
         setTasks(response.data.tasks);
@@ -27,8 +29,10 @@ function Dashboard() {
 
   return (
     <div>
-      <StatsView />
       <h1 className="text-3xl font-bold text-gray-900 sm:text-3xl py-2 text-center">Task Management Dashboard</h1>
+
+      <StatsView />
+      
       <TaskChart tasks={tasks} />
       <TaskStatus />
     </div>

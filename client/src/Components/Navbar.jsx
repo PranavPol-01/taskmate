@@ -11,13 +11,10 @@ function Navbar() {
 
   const navigate = useNavigate();
 
-  const handleClickProfile = () => {
-    navigate("/profile");
-  };
-
+ 
   useEffect(() => {
     const storedEmail = localStorage.getItem("username");
-    sethasEmail(!!storedEmail);
+    sethasEmail(storedEmail);
   }, []);
 
   const toggleMenu = () => {
@@ -28,9 +25,6 @@ function Navbar() {
     setIsMenuOpen(false);
   };
 
-  const toggleExtra = () => {
-    setIsOpen(!isOpen);
-  };
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");

@@ -60,7 +60,7 @@ function TaskStatus() {
 
   const renderTasks = (tasks) => {
     return (
-      <div className="bg-white text-grey-900 container px-5 py-10 mx-auto">
+      <div className="bg-white text-grey-900 container px-5 py-10 mx-auto ">
         {tasks.length === 0 ? (
           <NotFound/>
         ) : (
@@ -115,11 +115,11 @@ function TaskStatus() {
   };
 
   return (
-    <div className="flex flex-col items-center" ref={targetRef}>
+    <div className="flex flex-col items-center my-10" ref={targetRef}>
       <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b border-gray-300">
-        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl text-center pb-4">
+      <h1 className="text-3xl font-bold text-sky-500 sm:text-3xl py-2 flex justify-center">
           Task Status
-        </h1>
+          </h1>
         <fieldset className="flex flex-wrap gap-3 mb-3">
           <legend className="sr-only">Tab Options</legend>
 
