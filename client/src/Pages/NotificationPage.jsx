@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import NotFound from "../Components/NotFound";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const NotificationPage = () => {
   const [notifications, setNotifications] = useState([]);
@@ -46,15 +48,15 @@ const NotificationPage = () => {
         {notifications.length === 0 ? (
           <NotFound/>
         ) : (
-          <ul className="border border-gray-300 rounded-lg p-4">
+          <ul className="border border-gray-300 rounded-lg p-4 ">
             {notifications.map(notification => (
-              <li key={notification._id} className="mb-4">
+              <li key={notification._id} className="mb-4 inline-flex">
                 <p className="mb-2">{notification.message}</p>
                 <button
-                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700  "
                   onClick={() => handleDelete(notification._id)}
                 >
-                  Delete
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
               </li>
             ))}

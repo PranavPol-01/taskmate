@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Notification from './../../../server/models/notification';
-import Dashboard from './../Pages/Dashboard';
+import Notification from "./../../../server/models/notification";
+import Dashboard from "./../Pages/Dashboard";
+import LogoTM from "./LogoTM";
 
 function Navbar() {
   const [hasEmail, sethasEmail] = useState(false);
@@ -30,26 +31,30 @@ function Navbar() {
   const toggleExtra = () => {
     setIsOpen(!isOpen);
   };
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    navigate("/");
+  };
 
   return (
     <header
       className="border-b border-gray-700 md:border-b-0 md:border-none"
       // style={{ background: "#C5EBA8" }}
     >
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
+      <div className="mx-auto max-w-screen-xl px-4 ">
         <div className="flex h-16 items-center justify-between md:border-b-2 md:border-gray-200">
           <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
             <Link
               to="/tasks"
-              className="ml-3 text-xl  hover:text-green-500"
+              className="ml-3 text-xl  hover:text-sky-500"
               style={{ textDecoration: "none" }}
             >
               <a
-                className="flex font-medium items-center justify-center hover:text-green-500 text-gray-900  md:mb-0"
+                className="flex font-medium items-center justify-center hover:text-sky-500 text-gray-900  md:mb-0"
                 style={{ textDecoration: "none" }}
               >
-                
-                <svg
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
                   viewBox="0 0 375 374.999991"
@@ -73,13 +78,16 @@ function Navbar() {
                       fillRule="nonzero"
                     />
                   </g>
-                </svg>
+                </svg> */}
+                <LogoTM />
                 <span
-                  className="ml-3 text-xl  hover:text-green-500 italic font-bold"
+                  className="ml-3 lg:text-3xl text-xl font-bold hover:text-sky-500  "
                   style={{ textDecoration: "none" }}
                 >
-                  Task Mate
+                  TaskMate
                 </span>
+                
+
               </a>
             </Link>
           </div>
@@ -87,12 +95,24 @@ function Navbar() {
           <div className="md:flex md:items-center md:gap-12">
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm uppercase">
+              <li>
+                  <a>
+                    {" "}
+                    <Link
+                      to="/dashboard"
+                      className="text-gray-500 hover:text-sky-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Dashboard
+                    </Link>{" "}
+                  </a>
+                </li>
                 <li>
                   <a>
                     {" "}
                     <Link
                       to="/tasks"
-                      className="text-gray-500 hover:text-green-500"
+                      className="text-gray-500 hover:text-sky-500"
                       style={{ textDecoration: "none" }}
                     >
                       My Tasks
@@ -104,7 +124,7 @@ function Navbar() {
                     {" "}
                     <Link
                       to="/taskform"
-                      className="text-gray-500 hover:text-green-500"
+                      className="text-gray-500 hover:text-sky-500"
                       style={{ textDecoration: "none" }}
                     >
                       Add Task
@@ -117,45 +137,37 @@ function Navbar() {
                     {" "}
                     <Link
                       to="/notifications"
-                      className="text-gray-500 hover:text-green-500 h-5 w-5"
+                      className="text-gray-500 hover:text-sky-500 h-5 w-5"
                       style={{ textDecoration: "none" }}
                     >
                       <svg
-              aria-hidden="true"
-              class="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
-              ></path>
-            </svg>
-                      
+                        aria-hidden="true"
+                        class="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                      </svg>
                     </Link>{" "}
                   </a>
                 </li>
-
-                
-                   
               </ul>
             </nav>
 
             <div className="flex items-center gap-4">
               {hasEmail ? (
-                 (
-                  <div className="sm:flex sm:gap-4">
-                    <Link to="/dashboard" className="flex items-center">
-                      <a className="rounded-md bg-teal-600 lg:px-5 px-3 py-2.5 text-sm font-medium text-white shadow">
-                        Dashboard
-                      </a>
-                    </Link>
-                  </div>
-                )
+                <div className="sm:flex sm:gap-4">
+                  <Link to="/" className="flex items-center" onClick={logout}>
+                    <a className="rounded-md bg-blue-600 lg:px-5 px-3 py-2.5 text-sm font-medium text-white shadow">
+                      Logout
+                    </a>
+                  </Link>
+                </div>
               ) : (
                 <div className="sm:flex sm:gap-4">
                   <Link to="/login" className="flex items-center">
-                    <a className="rounded-md bg-teal-600 lg:px-5 px-3 py-2.5 text-sm font-medium text-white shadow">
+                    <a className="rounded-md bg-blue-600 lg:px-5 px-3 py-2.5 text-sm font-medium text-white shadow">
                       Login
                     </a>
                   </Link>
@@ -212,13 +224,22 @@ function Navbar() {
               </button>
 
               <ul className="flex flex-col gap-4">
-              <li>
+                <li>
                   <Link
                     to="/notifications"
                     className="text-gray-500 hover:text-gray-700"
                     onClick={closeMenu}
                   >
                     Notification
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Dashboard
                   </Link>
                 </li>
                 <li>
@@ -239,9 +260,6 @@ function Navbar() {
                     Add Tasks
                   </Link>
                 </li>
-                
-
-                
               </ul>
             </div>
           </div>

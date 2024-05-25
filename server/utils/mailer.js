@@ -4,14 +4,14 @@ import nodemailer from "nodemailer";
 const transporter = nodemailer.createTransport({
   service: 'gmail', 
   auth: {
-    user: 'pranav.s.pol144@gmail.com',
+    user: process.env.EMAIL,
     pass: process.env.PASS,
   },
 });
 
 const sendReminderEmail = (to, subject, text) => {
   const mailOptions = {
-    from: 'pranav.s.pol144@gmail.com',
+    from: process.env.EMAIL,
     to,
     subject,
     text,

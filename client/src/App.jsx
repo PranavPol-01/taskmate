@@ -16,7 +16,7 @@ import NotificationPage from './Pages/NotificationPage';
 import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
-  const username = useState(localStorage.getItem('username'));
+  const username = localStorage.getItem('username');
   return (
     <>
       <BrowserRouter>
