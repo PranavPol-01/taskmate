@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from './../Components/Navbar';
 
+
 function Login() {
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
@@ -116,7 +117,7 @@ function Login() {
                   {loading ? "Logging in..." : "Log in"}
                 </button>
 
-                <div className="relative flex items-center justify-center">
+                {/* <div className="relative flex items-center justify-center">
                   <span className="absolute inset-x-0 h-px bg-blue-300"></span>
                   <span className="relative bg-slate-50 px-4 text-sm text-blue-500">
                     Log in with social
@@ -138,7 +139,7 @@ function Login() {
                   >
                   </svg>
                   Continue with Google
-                </button>
+                </button> */}
               </div>
 
               <div className="flex items-center justify-center bg-blue-100 p-4">

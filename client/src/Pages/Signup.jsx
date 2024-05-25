@@ -113,7 +113,7 @@ function SignUp() {
                 >
                   Sign up
                 </button>
-                <div className="relative flex items-center justify-center">
+                {/* <div className="relative flex items-center justify-center">
                   <span className="absolute inset-x-0 h-px bg-blue-300"></span>
                   <span className="relative bg-white px-4 text-sm text-blue-600">Sign up with social</span>
                 </div>
@@ -128,7 +128,7 @@ function SignUp() {
                     <path d="M12 4.545c1.688 0 3.197.58 4.386 1.716l3.22-3.22C16.56 1.2 14.063 0 12 0 7.927 0 4.403 2.397 2.835 5.802l3.574 2.77C6.327 6.79 8.927 4.545 12 4.545z" fill="#EA4335"/>
                   </svg>
                   Continue with Google
-                </button>
+                </button> */}
               </div>
               <div className="flex items-center justify-center bg-blue-100 p-4">
                 <p className="text-center text-sm text-gray-500">Already have an account? <Link to="/login" className="text-blue-500 transition duration-100 hover:text-blue-600 active:text-blue-700">Login</Link></p>
