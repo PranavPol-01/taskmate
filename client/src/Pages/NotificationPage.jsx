@@ -73,11 +73,13 @@ const NotificationPage = () => {
                   initial={{
                     opacity: 0,
                     y: 50,
+                    x:-15,
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileInView={{
                     opacity: 1,
                     y: 0,
+                    x:0,
                     transition: {
                       duration: 1,
                       delay: index * 0.1,
