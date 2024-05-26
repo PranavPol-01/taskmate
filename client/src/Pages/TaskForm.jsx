@@ -18,7 +18,7 @@ function TaskForm() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:8800/api/tasks/${id}`, {
+      axios.get(`https://taskmate-1wwo.onrender.com/api/tasks/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -54,10 +54,10 @@ function TaskForm() {
      console.log(config)
 
       if (id) {
-        await axios.put(`http://localhost:8800/api/tasks/${id}`, taskPayload, config);
+        await axios.put(`https://taskmate-1wwo.onrender.com/api/tasks/${id}`, taskPayload, config);
         alert("Task updated successfully");
       } else {
-        await axios.post("http://localhost:8800/api/tasks", taskPayload, config);
+        await axios.post("https://taskmate-1wwo.onrender.com/api/tasks", taskPayload, config);
         alert("Task created successfully");
       }
       navigate("/tasks");

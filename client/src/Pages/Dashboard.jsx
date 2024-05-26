@@ -13,7 +13,7 @@ function Dashboard() {
       try {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username'); // Assuming username is stored in localStorage
-        const response = await axios.get(`http://localhost:8800/api/tasks`, {
+        const response = await axios.get(`https://taskmate-1wwo.onrender.com/api/tasks`, {
           headers: {
             Authorization: `Bearer ${token}`,
             Username: username,

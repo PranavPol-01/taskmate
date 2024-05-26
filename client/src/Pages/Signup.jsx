@@ -20,7 +20,7 @@ function SignUp() {
           };
 
           try {
-              const response = await axios.post('http://localhost:8800/api/users/register', userDetails, {
+              const response = await axios.post("https://taskmate-1wwo.onrender.com/api/users/register", userDetails, {
                   withCredentials: true, // Ensure cookies are sent with the request
               });
 

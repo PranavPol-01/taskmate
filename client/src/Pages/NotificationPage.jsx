@@ -16,7 +16,7 @@ const NotificationPage = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:8800/api/notifications",
+          "https://taskmate-1wwo.onrender.com/api/notifications",
           {
             headers: {
               Authorization: `Bearer ${token}`,

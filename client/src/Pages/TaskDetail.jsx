@@ -12,7 +12,7 @@ const TaskDetail = () => {
     const fetchTask = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:8800/api/tasks/${id}`, {
+        const response = await axios.get(`https://taskmate-1wwo.onrender.com/api/tasks/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -37,7 +37,7 @@ const TaskDetail = () => {
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:8800/api/tasks/${id}`, { status: "deleted" }, {
+      await axios.put(`https://taskmate-1wwo.onrender.com/api/tasks/${id}`, { status: "deleted" }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
