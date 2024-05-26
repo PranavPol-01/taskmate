@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
+    tasks: [{ type: Schema.Types.ObjectId, ref: "Tasks" }],
 
 },
 {
@@ -37,6 +37,6 @@ userSchema.pre("save", async function (next) {
     return await bcrypt.compare(enteredPassword, this.password);
   };
   
-  const users = mongoose.model("User", userSchema);
+  const users = mongoose.model("users", userSchema);
   
   export default users;
