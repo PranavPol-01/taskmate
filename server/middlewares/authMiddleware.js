@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
-import users from "../models/user.js";
+import users from "../models/User.js";
 
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = authHeader && authHeader.split(" ")[1];
   // const {token} = req.cookies;
   // console.log(authHeader);
   // console.log("token",token);
   if (!token) {
-    return res.status(401).send('Access Denied');
+    return res.status(401).send("Access Denied");
   }
   // console.log("reached here");
 
@@ -19,7 +19,7 @@ const authMiddleware = async (req, res, next) => {
     req.user = await users.findById(verified.id);
     next();
   } catch (error) {
-    res.status(400).send('Invalid Token');
+    res.status(400).send("Invalid Token");
   }
 };
 
