@@ -18,12 +18,15 @@ function SignUp() {
               email,
               password,
           };
-
+          localStorage.setItem("username", userName);
           try {
               const response = await axios.post("https://taskmate-1wwo.onrender.com/api/users/register", userDetails, {
                   withCredentials: true, // Ensure cookies are sent with the request
               });
-
+              const { token} = response.data;
+              // console.log(response.data)
+      
+              localStorage.setItem("token", token);
               console.log('User added successfully:', response.data);
               alert('User added successfully!');
               setUserName('');
