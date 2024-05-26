@@ -75,7 +75,7 @@ cron.schedule('* * * * *', () => {
 });
 
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:3000"], 
+  origin: ["http://localhost:5173", "http://localhost:3000","https://taskmate-myszpf9vs-pranav-pols-projects.vercel.app"], 
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true, 
 }));
