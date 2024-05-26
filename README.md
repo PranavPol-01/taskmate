@@ -116,26 +116,34 @@ TaskMate is built with a React frontend and a Node.js/Express backend. It uses M
 ## Screenshots
 
 ### Home Page
+![tm](https://github.com/PranavPol-01/taskmate/assets/138373185/e50509ac-7c57-46b3-9ba3-5c9fe65bcb27)
 
-![Home Page](./client/public/homepage.png)
+![homepage](https://github.com/PranavPol-01/taskmate/assets/138373185/f5c893ba-859a-48c9-9e62-cd7bd9abc4b5)
+
 
 ### Task List
 
-![Task List](./client/public/tasklist.png)
+![tasklist](https://github.com/PranavPol-01/taskmate/assets/138373185/a31225b2-6aff-43ba-9152-71f76dea415a)
+
 
 ### Task Details
 
-![Task Details](./client/public/taskdetails.png)
+![taskdetails](https://github.com/PranavPol-01/taskmate/assets/138373185/db3a75ef-a0b2-4b08-a6e3-e4137dc0b1c0)
+
 
 ### Dashboard
 
-![Task Details](./client/public/dashboard.png)
 
+![dashboard](https://github.com/PranavPol-01/taskmate/assets/138373185/a2dcdb8d-83ea-45d3-89a8-f249ad389f8d)
 
 
 ## Demo Video
 
-[Watch the demo video](https://youtu.be/wPQqJtToZm4)
+[Watch the demo video]
+
+https://github.com/PranavPol-01/taskmate/assets/138373185/5f4c7e0a-8a73-499a-9881-2bc30eb5df94
+
+(https://youtu.be/wPQqJtToZm4)
 
 ## Contributing
 
