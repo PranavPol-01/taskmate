@@ -59,7 +59,7 @@ export const registerUser = async (req, res) => {
 // Get user profile
 export const getUser = async (req, res) => {
   try {
-    const user = await user.findById(req.user.id).select('-password');
+    const user = await users.findById(req.user.id).select('-password');
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
