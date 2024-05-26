@@ -30,7 +30,7 @@ function SignUp() {
               setEmail('');
               setPassword('');
               setConfirmPassword('');
-              navigate('/login');
+              navigate('/tasks');
           } catch (error) {
               console.error('Error adding user:', error.message);
           }

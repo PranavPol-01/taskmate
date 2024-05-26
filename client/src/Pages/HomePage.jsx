@@ -96,7 +96,7 @@ function LandingPage() {
                         y: 0,
                       },
                     }}
-                    viewport={{ once: true }}>
+                    viewport={{ once: false }}>
                     <FeatureCard
                       title="Task Scheduling"
                       description="Easily schedule tasks and set deadlines to stay on track."
@@ -127,7 +127,7 @@ function LandingPage() {
                         y: 0,
                       },
                     }}
-                    viewport={{ once: true }}>
+                    viewport={{ once: false }}>
                     <FeatureCard
                       title="Priority Setting"
                       description="Set priorities to focus on what's important."
@@ -154,7 +154,7 @@ function LandingPage() {
                         y: 0,
                       },
                     }}
-                    viewport={{ once: true }}>
+                    viewport={{ once: false }}>
                     <FeatureCard
                       title="Reminders"
                       description="Get timely reminders for your tasks."
