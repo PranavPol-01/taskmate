@@ -9,10 +9,10 @@ const TaskChart = ({ tasks }) => {
     const now = new Date();
     const end = new Date(endTime);
     const hoursDifference = (end - now) / (1000 * 60 * 60);
-
+    if(end > now){
     if (hoursDifference <= 12) return "High";
     if (hoursDifference <= 24) return "Medium";
-    return "Low";
+    return "Low";}
   };
 
   const taskPriorities = useMemo(() => {

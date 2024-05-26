@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import heroImage from './assets/hero-image.png'; // Replace with your actual image path
 import tasksvg from "../assets/task-animate.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,6 +9,8 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import Preloader from "../Components/Preloader";
 import Navbar from './../Components/Navbar';
+import { motion } from "framer-motion";
+
 
 function LandingPage() {
   const [hasEmail, sethasEmail] = useState(false);
@@ -77,6 +78,25 @@ function LandingPage() {
                     Features
                   </h2>
                   <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 ">
+                    <motion.div
+                    initial={{
+                      opacity: 0,
+                      y: 50,
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 1,
+                        // delay: index * 0.1,
+                      },
+                      animate: {
+                        opacity: 1,
+                        y: 0,
+                      },
+                    }}
+                    viewport={{ once: true }}>
                     <FeatureCard
                       title="Task Scheduling"
                       description="Easily schedule tasks and set deadlines to stay on track."
@@ -88,6 +108,26 @@ function LandingPage() {
                       }
                       newProp="New Value"
                     />
+                    </motion.div>
+                    <motion.div
+                    initial={{
+                      opacity: 0,
+                      y: 50,
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 1,
+                        // delay: index * 0.1,
+                      },
+                      animate: {
+                        opacity: 1,
+                        y: 0,
+                      },
+                    }}
+                    viewport={{ once: true }}>
                     <FeatureCard
                       title="Priority Setting"
                       description="Set priorities to focus on what's important."
@@ -95,6 +135,26 @@ function LandingPage() {
                         <FontAwesomeIcon className="w-6 h-6" icon={faFlag} />
                       }
                     />
+                    </motion.div>
+                    <motion.div
+                    initial={{
+                      opacity: 0,
+                      y: 50,
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 1,
+                        // delay: index * 0.1,
+                      },
+                      animate: {
+                        opacity: 1,
+                        y: 0,
+                      },
+                    }}
+                    viewport={{ once: true }}>
                     <FeatureCard
                       title="Reminders"
                       description="Get timely reminders for your tasks."
@@ -102,6 +162,7 @@ function LandingPage() {
                         <FontAwesomeIcon className="w-6 h-6" icon={faBell} />
                       }
                     />
+                    </motion.div>
                   </div>
                 </div>
               </section>

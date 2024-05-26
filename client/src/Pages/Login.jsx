@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from './../Components/Navbar';
+import Loader from './../Components/Loader';
 
 
 function Login() {
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // Update the initial state to false
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleuserNameChange = (e) => {
@@ -19,7 +20,7 @@ function Login() {
   };
 
   const handleLogin = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
 
     try {
       if (userName.trim() !== "" && password.trim() !== "") {
@@ -43,7 +44,7 @@ function Login() {
 
         console.log("Successful login");
         alert("Successful login");
-        navigate("/dashboard");
+        navigate("/tasks");
       } else {
         alert("Please enter all the details");
       }
@@ -54,6 +55,9 @@ function Login() {
       setLoading(false);
     }
   };
+  if (loading) {
+    return <Loader />;
+  }
 
   const handleGoogleLogin = async () => {
     // Google login implementation

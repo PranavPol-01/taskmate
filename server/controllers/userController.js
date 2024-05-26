@@ -1,4 +1,4 @@
-import User from '../models/user.js';
+import users from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -9,7 +9,7 @@ export const registerUser = async (req, res) => {
       console.log('Incoming registration request:', req.body);
       const { username, email, password } = req.body;
   
-      const existingUser = await User.findOne({ email });
+      const existingUser = await users.findOne({ email });
       if (existingUser) {
         console.log('User already exists');
         return res.status(400).json({ message: 'User already exists' });
@@ -18,7 +18,7 @@ export const registerUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 12);
       console.log('Password hashed successfully');
   
-      const newUser = new User({ username, email, password: hashedPassword });
+      const newUser = new users({ username, email, password: hashedPassword });
       await newUser.save();
   
       console.log('User registered successfully');
@@ -35,7 +35,7 @@ export const registerUser = async (req, res) => {
     try {
       const { username, password } = req.body; 
       // console.log("Received data from client:", { username, password });
-      const user = await User.findOne({ username });
+      const user = await users.findOne({ username });
       //  console.log("User found in DB:", user);
       if (!user) {
         return res.status(400).json({ message: 'User not found' });
@@ -59,7 +59,7 @@ export const registerUser = async (req, res) => {
 // Get user profile
 export const getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await user.findById(req.user.id).select('-password');
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
