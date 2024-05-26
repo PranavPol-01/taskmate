@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from './../Components/Navbar';
-import Loader from './../Components/Loader';
+
 
 
 function Login() {
@@ -51,13 +51,9 @@ function Login() {
     } catch (error) {
       console.error("Error during login:", error);
       alert("Error during login. Please check your credentials.");
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
-  if (loading) {
-    return <Loader />;
-  }
+ 
 
   const handleGoogleLogin = async () => {
     // Google login implementation
