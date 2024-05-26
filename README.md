@@ -2,8 +2,6 @@
 
 TaskMate is a task management application that helps users manage their tasks with priorities and deadlines. Users can receive email reminders and notifications for tasks nearing their deadlines.
 
-## Deploy link
-https://taskmate-pi.vercel.app
 
 ## Table of Contents
 
