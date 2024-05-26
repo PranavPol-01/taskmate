@@ -53,7 +53,7 @@ function LandingPage() {
                       </Link>
                     ) : (
                       <Link
-                        to="/signup"
+                        to="/login"
                         className="bg-sky-500 text-white px-6 py-3 rounded-md shadow hover:bg-sky-600 transition"
                       >
                         Get Started
