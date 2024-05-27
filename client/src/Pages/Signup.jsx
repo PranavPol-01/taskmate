@@ -1,46 +1,57 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from '../utils/axios'; // Import the Axios instance
-import Navbar from './../Components/Navbar';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "../utils/axios"; // Import the Axios instance
+import Navbar from "./../Components/Navbar";
 
 function SignUp() {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleAddUser = async () => {
-    if (userName.trim() !== '' && email.trim() !== '' && password.trim() !== '') {
+    if (
+      userName.trim() !== "" &&
+      email.trim() !== "" &&
+      password.trim() !== ""
+    ) {
       if (password === confirmPassword) {
-          const userDetails = {
-              username: userName,
-              email,
-              password,
-          };
-          
-          try {
-              const response = await axios.post("https://taskmate-1wwo.onrender.com/api/users/register", userDetails, {
-                  withCredentials: true, // Ensure cookies are sent with the request
-              });
-             
-              console.log('User added successfully:', response.data);
-              alert('User added successfully!');
-              setUserName('');
-              setEmail('');
-              setPassword('');
-              setConfirmPassword('');
-              navigate('/tasks');
-          } catch (error) {
-              console.error('Error adding user:', error.message);
-          }
+        const userDetails = {
+          username: userName,
+          email,
+          password,
+        };
+        localStorage.setItem("username", userName);
+        try {
+          const response = await axios.post(
+            "https://taskmate-1wwo.onrender.com/api/users/register",
+            userDetails,
+            {
+              withCredentials: true,
+            }
+          );
+          const { token } = response.data;
+          // console.log(response.data)
+
+          localStorage.setItem("token", token);
+          console.log("User added successfully:", response.data);
+          alert("User added successfully!");
+          setUserName("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          navigate("/tasks");
+        } catch (error) {
+          console.error("Error adding user:", error.message);
+        }
       } else {
-          alert('Passwords do not match!');
+        alert("Passwords do not match!");
       }
-  } else {
-      alert('Please enter all details');
-  }
-};
+    } else {
+      alert("Please enter all details");
+    }
+  };
   const handleGoogleLogin = async () => {
     // Implement your Google login logic here
     // Example using Firebase:
@@ -58,16 +69,29 @@ function SignUp() {
   };
 
   return (
-    <>    <Navbar/>
-
-      <div style={{ backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, backgroundSize: 'cover' }}>
+    <>
+      {" "}
+      <Navbar />
+      <div
+        style={{
+          backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
+          backgroundSize: "cover",
+        }}
+      >
         <div className="py-4 sm:py-6 lg:py-8 w-screen h-screen flex justify-center items-center sm:px-4">
           <div className="bg-white/40 max-w-md py-4 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
-            <h2 className="mb-4 text-center text-2xl font-bold text-blue-800 md:mb-8 lg:text-3xl">Signup</h2>
+            <h2 className="mb-4 text-center text-2xl font-bold text-blue-800 md:mb-8 lg:text-3xl">
+              Signup
+            </h2>
             <form className="mx-auto max-w-lg rounded-lg border ring-blue-300">
               <div className="flex flex-col gap-4 p-2 md:p-6">
                 <div>
-                  <label htmlFor="user-name" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">User name</label>
+                  <label
+                    htmlFor="user-name"
+                    className="mb-2 inline-block text-sm text-blue-800 sm:text-base"
+                  >
+                    User name
+                  </label>
                   <input
                     id="user-name"
                     type="text"
@@ -77,7 +101,12 @@ function SignUp() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">Email</label>
+                  <label
+                    htmlFor="email"
+                    className="mb-2 inline-block text-sm text-blue-800 sm:text-base"
+                  >
+                    Email
+                  </label>
                   <input
                     id="email"
                     type="email"
@@ -87,7 +116,12 @@ function SignUp() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="password" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">Password</label>
+                  <label
+                    htmlFor="password"
+                    className="mb-2 inline-block text-sm text-blue-800 sm:text-base"
+                  >
+                    Password
+                  </label>
                   <input
                     id="password"
                     type="password"
@@ -97,7 +131,12 @@ function SignUp() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="confirm-password" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">Confirm password</label>
+                  <label
+                    htmlFor="confirm-password"
+                    className="mb-2 inline-block text-sm text-blue-800 sm:text-base"
+                  >
+                    Confirm password
+                  </label>
                   <input
                     id="confirm-password"
                     type="password"
@@ -131,7 +170,15 @@ function SignUp() {
                 </button> */}
               </div>
               <div className="flex items-center justify-center bg-blue-100 p-4">
-                <p className="text-center text-sm text-gray-500">Already have an account? <Link to="/login" className="text-blue-500 transition duration-100 hover:text-blue-600 active:text-blue-700">Login</Link></p>
+                <p className="text-center text-sm text-gray-500">
+                  Already have an account?{" "}
+                  <Link
+                    to="/login"
+                    className="text-blue-500 transition duration-100 hover:text-blue-600 active:text-blue-700"
+                  >
+                    Login
+                  </Link>
+                </p>
               </div>
             </form>
           </div>

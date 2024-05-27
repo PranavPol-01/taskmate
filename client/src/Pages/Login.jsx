@@ -43,8 +43,10 @@ function Login() {
       
 
         console.log("Successful login");
-        alert("Successful login");
         navigate("/tasks");
+        console.log("navigated");
+        alert("Successful login");
+        
       } else {
         alert("Please enter all the details");
       }

@@ -245,7 +245,7 @@ function Navbar() {
                 </li>
                 <li>
                   <Link
-                    to="/addtasks"
+                    to="/taskform"
                     className="text-gray-500 hover:text-gray-700"
                     onClick={closeMenu}
                   >
